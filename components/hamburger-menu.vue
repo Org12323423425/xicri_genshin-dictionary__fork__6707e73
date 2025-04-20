@@ -82,7 +82,7 @@ import type { Locale } from "~/types";
 const i18n = useI18n<[], Locale>({
   useScope: "local",
 });
-const locales = <LocaleObject[]>i18n.locales.value;
+const locales = i18n.locales.value as LocaleObject[];
 const t = i18n.t;
 const open = ref(false);
 
@@ -92,7 +92,8 @@ const open = ref(false);
 const localePath = useLocalePath();
 const switchLocalePath = useSwitchLocalePath();
 const toggleMenu = (evt: MouseEvent): void => {
-  open.value = (<HTMLInputElement>evt.target)?.checked;
+  const target = evt.target as HTMLInputElement;
+  open.value = target?.checked;
 };
 const closeMenu = (): void => {
   open.value = false;
